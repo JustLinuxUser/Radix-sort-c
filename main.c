@@ -23,38 +23,35 @@ int *sort(int *arr, int n)
 {
 	int *ptr1 = arr;
 	int *ptr2 = (int *)malloc(n * sizeof(int));
-	int count[10] = {0};
+	int count[11] = {0};
 	int length = 0;
-	for (int z = 0; z < 4; z++)
+
+	while (1)
 	{
 		for (int i = 0; i < n; i++)
 		{
-			count[get_dig(ptr1[i], length)]++;
+			count[get_dig(ptr1[i], length) + 1]++;
 		}
+		if (count[1] == n)
+			break;
 
-		for (int i = 1; i < 10; i++)
+		for (int i = 2; i < 11; i++)
 		{
 			count[i] = count[i] + count[i - 1];
 		}
 		int zero = 0;
+
 		for (int i = 0; i < n; i++)
 		{
-			if (get_dig(ptr1[i], length) == 0)
-			{
-				ptr2[zero] = ptr1[i];
-				zero++;
-			}
-			else
-			{
-				ptr2[count[get_dig(ptr1[i], length)] - 1] = ptr1[i];
-				count[get_dig(ptr1[i], length)]--;
-			}
+
+			ptr2[count[get_dig(ptr1[i], length)]] = ptr1[i];
+
+			count[get_dig(ptr1[i], length)]++;
 		}
 
 		length++;
 
-		print_arr(count, 10);
-		for (int c = 0; c < 10; c++)
+		for (int c = 0; c < 11; c++)
 		{
 			count[c] = 0;
 		}
@@ -62,14 +59,22 @@ int *sort(int *arr, int n)
 		int *temp = ptr1;
 		ptr1 = ptr2;
 		ptr2 = temp;
-		print_arr(ptr1, 10);
 	}
+	print_arr(ptr1, n);
 }
 
 int main()
 {
-	int arr[] = {1222, 32, 5, 765, 75, 75, 3, 2, 9, 870};
-	sort(arr, 10);
+	int n = 50;
+	int *arr = (int *)malloc(n * sizeof(int));
+	int nums = 5;
+
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand() % (int)pow(10, nums);
+	}
+
+	sort(arr, n);
 
 	return 0;
 }
