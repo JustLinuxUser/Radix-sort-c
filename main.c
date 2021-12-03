@@ -39,7 +39,6 @@ int *sort(int *arr, int n)
 		{
 			count[i] = count[i] + count[i - 1];
 		}
-		int zero = 0;
 
 		for (int i = 0; i < n; i++)
 		{
@@ -60,7 +59,7 @@ int *sort(int *arr, int n)
 		ptr1 = ptr2;
 		ptr2 = temp;
 	}
-	print_arr(ptr1, n);
+	return (ptr1);
 }
 
 int main()
@@ -74,7 +73,7 @@ int main()
 		arr[i] = rand() % (int)pow(10, nums);
 	}
 
-	sort(arr, n);
+	print_arr(sort(arr, n), n);
 
 	return 0;
 }
