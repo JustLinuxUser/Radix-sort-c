@@ -1,5 +1,5 @@
 LIBS="-lm"
-FLAGS="-Wall -Wextra --std=c11 -ggdb"
+FLAGS="-Wall -Wextra --std=c11 -ggdb --pedantic"
 
 
 set -xe
